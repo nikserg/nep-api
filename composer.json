@@ -1,0 +1,19 @@
+{
+    "name": "nikserg/eye-api",
+    "description": "Itcom Eye Api",
+    "keywords": [],
+    "authors": [
+        {
+            "name": "Nikita Zarubin",
+            "email": "nikitadimitrov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "nikserg\\EyeApi\\": ""
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    }
+}
