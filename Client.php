@@ -37,7 +37,7 @@ class Client
      */
     public function get(string $action, $params = []): array
     {
-        $response = $this->client->get($action, ['query' => $params]);
+        $response = $this->client->get($action, ['query' => ['criteria' =>  $params]]);
         $decoded = json_decode($response->getBody()->getContents(), true);
         if (!isset($decoded['code'])) {
             throw new NepApiMalformedResponseException('Malformed or no response from ' . $action . ': ' . $response->getBody()->getContents());
