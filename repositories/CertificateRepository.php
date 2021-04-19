@@ -3,6 +3,7 @@
 namespace nikserg\NepApi\repositories;
 
 use nikserg\NepApi\Client;
+use nikserg\NepApi\criteria\AbstractCriteria;
 use nikserg\NepApi\models\Certificate;
 use nikserg\NepApi\models\Organization;
 use nikserg\NepApi\models\Person;
@@ -10,7 +11,7 @@ use nikserg\NepApi\models\Person;
 /**
  * Class CertificateRepository
  *
- * @method list():Certificate[]
+ * @method list(AbstractCriteria $criteria = null):Certificate[]
  *
  * @package nikserg\NepApi\repositories
  */
