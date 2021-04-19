@@ -10,6 +10,7 @@ use nikserg\NepApi\models\AbstractModel;
 abstract class AbstractRepository
 {
     protected abstract function getAction(): string;
+
     protected abstract function getModelClass(): string;
 
     public function __construct(
@@ -34,7 +35,7 @@ abstract class AbstractRepository
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \nikserg\NepApi\exception\NepApiException
      */
-    public function list():array
+    public function list(): array
     {
         $data = $this->client->get($this->getAction(), $this->criteria->toArray());
         if (!isset($data['list'])) {
@@ -46,6 +47,7 @@ abstract class AbstractRepository
         foreach ($list as $item) {
             $return[] = new $modelClassName($item);
         }
+
         return $return;
     }
 }

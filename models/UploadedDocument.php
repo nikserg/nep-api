@@ -23,4 +23,10 @@ class UploadedDocument extends AbstractModel
      * @var Document Описание типа документа
      */
     public Document $document;
+
+    public function __construct(array $array)
+    {
+        $array['document'] = new Document($array['document']);
+        parent::__construct($array);
+    }
 }

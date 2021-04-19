@@ -31,4 +31,18 @@ class Certificate extends AbstractModel
      * @var \DateTime
      */
     public \DateTime $updatedAt;
+
+
+    public function __construct(array $array)
+    {
+        $array['updatedAt'] = new \DateTime($array['updatedAt']);
+        $array['createdAt'] = new \DateTime($array['createdAt']);
+        $items = [];
+        foreach ($array['uploadedDocuments'] as $item) {
+            $items[] = new UploadedDocument($item);
+        }
+        $array['uploadedDocuments'] = $items;
+        $array['person'] = new Person($array['person']);
+        parent::__construct($array);
+    }
 }

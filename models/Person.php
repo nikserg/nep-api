@@ -45,4 +45,17 @@ class Person extends AbstractModel
      * @var UploadedDocument[]
      */
     public array $uploadedDocuments;
+
+
+    public function __construct(array $array)
+    {
+        $array['updatedAt'] = new \DateTime($array['updatedAt']);
+        $array['createdAt'] = new \DateTime($array['createdAt']);
+        $items = [];
+        foreach ($array['uploadedDocuments'] as $item) {
+            $items[] = new UploadedDocument($item);
+        }
+        $array['uploadedDocuments'] = $items;
+        parent::__construct($array);
+    }
 }

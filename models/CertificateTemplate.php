@@ -29,4 +29,21 @@ class CertificateTemplate extends AbstractModel {
      * @var Document[] Требуемые для выпуска документы
      */
     public array $documents;
+
+
+    public function __construct(array $array)
+    {
+        $items = [];
+        foreach ($array['oids'] as $item) {
+            $items[] = new Oid($item);
+        }
+        $array['oids'] = $items;
+
+        $items = [];
+        foreach ($array['documents'] as $item) {
+            $items[] = new Document($item);
+        }
+        $array['documents'] = $items;
+        parent::__construct($array);
+    }
 }
