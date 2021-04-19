@@ -16,11 +16,6 @@ class CertificateTemplate extends AbstractModel {
     public string $name;
 
     /**
-     * @var string Машинное имя сертификата
-     */
-    public string $machineName;
-
-    /**
      * @var Oid[] Включаемые в сертификат ОИДы
      */
     public array $oids;
