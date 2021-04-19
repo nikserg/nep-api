@@ -7,6 +7,12 @@ use nikserg\NepApi\models\CertificateTemplate;
 use nikserg\NepApi\models\Organization;
 use nikserg\NepApi\models\Person;
 
+/**
+ * Class CertificateTemplateRepository
+ *
+ * @method CertificateTemplate[] list()
+ * @package nikserg\NepApi\repositories
+ */
 class CertificateTemplateRepository extends AbstractRepository
 {
     protected function getAction(): string
