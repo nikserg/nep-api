@@ -23,6 +23,11 @@ class Certificate extends AbstractModel
     public array $uploadedDocuments;
 
     /**
+     * @var CertificateTemplate Шаблон сертификата
+     */
+    public CertificateTemplate $certificateTemplate;
+
+    /**
      * @var \DateTime
      */
     public \DateTime $createdAt;
@@ -43,6 +48,7 @@ class Certificate extends AbstractModel
         }
         $array['uploadedDocuments'] = $items;
         $array['person'] = new Person($array['person']);
+        $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
         parent::__construct($array);
     }
 }
