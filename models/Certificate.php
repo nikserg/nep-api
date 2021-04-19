@@ -28,6 +28,11 @@ class Certificate extends AbstractModel
     public CertificateTemplate $certificateTemplate;
 
     /**
+     * @var Organization Организация, на которую выпускается сертификат
+     */
+    public Organization $organization;
+
+    /**
      * @var \DateTime
      */
     public \DateTime $createdAt;
@@ -48,6 +53,7 @@ class Certificate extends AbstractModel
         }
         $array['uploadedDocuments'] = $items;
         $array['person'] = new Person($array['person']);
+        $array['organization'] = new Organization($array['organization']);
         $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
         parent::__construct($array);
     }
