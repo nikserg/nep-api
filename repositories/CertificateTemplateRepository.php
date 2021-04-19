@@ -11,6 +11,7 @@ use nikserg\NepApi\models\Person;
  * Class CertificateTemplateRepository
  *
  * @method CertificateTemplate[] list()
+ * @method CertificateTemplate get(int $id)
  * @package nikserg\NepApi\repositories
  */
 class CertificateTemplateRepository extends AbstractRepository

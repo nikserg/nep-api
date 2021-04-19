@@ -11,7 +11,8 @@ use nikserg\NepApi\models\Person;
 /**
  * Class CertificateRepository
  *
- * @method list(AbstractCriteria $criteria = null):Certificate[]
+ * @method Certificate[] list(AbstractCriteria $criteria = null)
+ * @method Certificate get(int $id)
  *
  * @package nikserg\NepApi\repositories
  */

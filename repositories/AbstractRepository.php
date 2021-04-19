@@ -77,18 +77,18 @@ abstract class AbstractRepository
      *
      *
      * @param int $id
-     * @return $this
+     * @return AbstractModel
      * @throws NepApiMalformedResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \nikserg\NepApi\exception\NepApiException
      */
-    public function get(int $id): static
+    public function get(int $id): AbstractModel
     {
         $data = $this->client->get($this->getAction() . '/' . $id);
         if (!isset($data['item'])) {
             throw new NepApiMalformedResponseException('Expected `item` key, got array ' . print_r($data, true));
         }
         $modelClassName = $this->getModelClass();
-        return  new $modelClassName($data['item']);
+        return new $modelClassName($data['item']);
     }
 }
