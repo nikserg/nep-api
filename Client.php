@@ -11,6 +11,10 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
     public const ACTION_ORGANIZATION = 'organization';
+    public const ACTION_PERSON = 'person';
+    public const ACTION_CERTIFICATE = 'certificate';
+    public const ACTION_CERTIFICATE_TEMPLATE = 'certificate-template';
+
 
 
     protected \GuzzleHttp\Client $client;

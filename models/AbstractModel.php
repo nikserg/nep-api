@@ -2,8 +2,10 @@
 
 namespace nikserg\NepApi\models;
 
-class AbstractModel
+abstract class AbstractModel
 {
+    public int $id;
+
     /**
      * AbstractModel constructor.
      *
