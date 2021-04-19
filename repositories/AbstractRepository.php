@@ -14,14 +14,23 @@ abstract class AbstractRepository
     protected abstract function getModelClass(): string;
 
     public function __construct(
-        protected Client $client,
-        protected AbstractCriteria $criteria
+        protected Client $client
     ) {
     }
 
-    public function count()
+    /**
+     * Посчитать количество моделей по критерию
+     *
+     *
+     * @param AbstractCriteria|null $criteria
+     * @return int
+     * @throws NepApiMalformedResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \nikserg\NepApi\exception\NepApiException
+     */
+    public function count(AbstractCriteria $criteria = null): int
     {
-        $data = $this->client->get($this->getAction() . '/count', $this->criteria->toArray());
+        $data = $this->client->get($this->getAction() . '/count', $this->getParams($criteria));
         if (!isset($data['count'])) {
             throw new NepApiMalformedResponseException('Expected `count` key, got array ' . print_r($data, true));
         }
@@ -29,15 +38,27 @@ abstract class AbstractRepository
         return $data['count'];
     }
 
+    private function getParams(AbstractCriteria $criteria = null): array
+    {
+        if ($criteria) {
+            return $criteria->toArray();
+        }
+        return [];
+    }
+
     /**
+     * Получить список моделей по критерию
+     *
+     *
+     * @param AbstractCriteria|null $criteria
      * @return AbstractModel[]
      * @throws NepApiMalformedResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \nikserg\NepApi\exception\NepApiException
      */
-    public function list(): array
+    public function list(AbstractCriteria $criteria = null): array
     {
-        $data = $this->client->get($this->getAction(), $this->criteria->toArray());
+        $data = $this->client->get($this->getAction(), $this->getParams($criteria));
         if (!isset($data['list'])) {
             throw new NepApiMalformedResponseException('Expected `list` key, got array ' . print_r($data, true));
         }
@@ -49,5 +70,25 @@ abstract class AbstractRepository
         }
 
         return $return;
+    }
+
+    /**
+     * Получить модель по ID
+     *
+     *
+     * @param int $id
+     * @return $this
+     * @throws NepApiMalformedResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \nikserg\NepApi\exception\NepApiException
+     */
+    public function get(int $id): static
+    {
+        $data = $this->client->get($this->getAction() . '/' . $id);
+        if (!isset($data['item'])) {
+            throw new NepApiMalformedResponseException('Expected `item` key, got array ' . print_r($data, true));
+        }
+        $modelClassName = $this->getModelClass();
+        return  new $modelClassName($data['item']);
     }
 }
