@@ -13,6 +13,7 @@ class Client
     public const ACTION_PERSON = 'person';
     public const ACTION_CERTIFICATE = 'certificate';
     public const ACTION_CERTIFICATE_TEMPLATE = 'certificate-template';
+    public const ACTION_DOCUMENT = 'document';
 
 
     protected \GuzzleHttp\Client $client;

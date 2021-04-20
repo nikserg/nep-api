@@ -15,6 +15,7 @@ class Document extends AbstractModel
 {
     public const TYPE_CERTIFICATE = 'certificate';
     public const TYPE_PERSON = 'person';
+    public const TYPE_ORGANIZATION = 'organization';
 
     /**
      * @var string Машинное название документа

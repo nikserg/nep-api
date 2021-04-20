@@ -11,7 +11,7 @@ use DateTime;
  *
  * @package nikserg\NepApi\models
  */
-class Certificate extends AbstractModel
+class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
 {
 
     /**
@@ -57,16 +57,30 @@ class Certificate extends AbstractModel
 
     public function __construct(array $array)
     {
-        $array['updatedAt'] = new DateTime($array['updatedAt']);
-        $array['createdAt'] = new DateTime($array['createdAt']);
+        if (isset($array['updatedAt']) && $array['updatedAt']) {
+            $array['updatedAt'] = new DateTime($array['updatedAt']);
+        }
+        if (isset($array['createdAt']) && $array['createdAt']) {
+            $array['createdAt'] = new DateTime($array['createdAt']);
+        }
         $items = [];
-        foreach ($array['uploadedDocuments'] as $item) {
-            $items[] = new UploadedDocument($item);
+        if (isset($array['uploadedDocuments'])) {
+            foreach ($array['uploadedDocuments'] as $item) {
+                $items[] = new UploadedDocument($item);
+            }
         }
         $array['uploadedDocuments'] = $items;
         $array['person'] = new Person($array['person']);
         $array['organization'] = new Organization($array['organization']);
         $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
         parent::__construct($array);
+    }
+
+    /**
+     * @return UploadedDocument[]
+     */
+    public function getUploadedDocuments(): array
+    {
+        return $this->uploadedDocuments;
     }
 }

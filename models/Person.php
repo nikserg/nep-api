@@ -11,7 +11,7 @@ use DateTime;
  *
  * @package nikserg\NepApi\models
  */
-class Person extends AbstractModel
+class Person extends AbstractModel implements HasUploadedDocumentsInterface
 {
     /**
      * @var string|null
@@ -61,11 +61,17 @@ class Person extends AbstractModel
 
     public function __construct(array $array)
     {
-        $array['updatedAt'] = new DateTime($array['updatedAt']);
-        $array['createdAt'] = new DateTime($array['createdAt']);
+        if (isset($array['updatedAt']) && $array['updatedAt']) {
+            $array['updatedAt'] = new DateTime($array['updatedAt']);
+        }
+        if (isset($array['createdAt']) && $array['createdAt']) {
+            $array['createdAt'] = new DateTime($array['createdAt']);
+        }
         $items = [];
-        foreach ($array['uploadedDocuments'] as $item) {
-            $items[] = new UploadedDocument($item);
+        if (isset($array['uploadedDocuments'])) {
+            foreach ($array['uploadedDocuments'] as $item) {
+                $items[] = new UploadedDocument($item);
+            }
         }
         $array['uploadedDocuments'] = $items;
         parent::__construct($array);
@@ -96,5 +102,14 @@ class Person extends AbstractModel
     public function __toString()
     {
         return $this->getFio();
+    }
+
+
+    /**
+     * @return UploadedDocument[]
+     */
+    public function getUploadedDocuments(): array
+    {
+        return $this->uploadedDocuments;
     }
 }
