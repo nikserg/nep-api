@@ -10,4 +10,9 @@ interface HasUploadedDocumentsInterface
      */
     public function getUploadedDocuments(): array;
 
+    /**
+     * @return string
+     */
+    public function getDocumentType(): string;
+
 }

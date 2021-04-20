@@ -112,4 +112,10 @@ class Person extends AbstractModel implements HasUploadedDocumentsInterface
     {
         return $this->uploadedDocuments;
     }
+
+
+    public function getDocumentType(): string
+    {
+        return Document::TYPE_PERSON;
+    }
 }

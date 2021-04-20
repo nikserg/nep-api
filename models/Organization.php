@@ -25,4 +25,10 @@ class Organization extends AbstractModel
     {
         return $this->name;
     }
+
+
+    public function getDocumentType(): string
+    {
+        return Document::TYPE_ORGANIZATION;
+    }
 }

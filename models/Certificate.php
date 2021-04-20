@@ -83,4 +83,9 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     {
         return $this->uploadedDocuments;
     }
+
+    public function getDocumentType(): string
+    {
+        return Document::TYPE_CERTIFICATE;
+    }
 }
