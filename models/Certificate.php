@@ -2,6 +2,8 @@
 
 namespace nikserg\NepApi\models;
 
+use DateTime;
+
 /**
  * Class Certificate
  *
@@ -33,20 +35,30 @@ class Certificate extends AbstractModel
     public Organization $organization;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    public \DateTime $createdAt;
+    public DateTime $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    public \DateTime $updatedAt;
+    public DateTime $updatedAt;
+
+    public function prepareForSave(): array
+    {
+        $array = parent::prepareForSave();
+        unset($array['uploadedDocuments']);
+        unset($array['updatedAt']);
+        unset($array['createdAt']);
+
+        return $array;
+    }
 
 
     public function __construct(array $array)
     {
-        $array['updatedAt'] = new \DateTime($array['updatedAt']);
-        $array['createdAt'] = new \DateTime($array['createdAt']);
+        $array['updatedAt'] = new DateTime($array['updatedAt']);
+        $array['createdAt'] = new DateTime($array['createdAt']);
         $items = [];
         foreach ($array['uploadedDocuments'] as $item) {
             $items[] = new UploadedDocument($item);

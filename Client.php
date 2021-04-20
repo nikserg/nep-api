@@ -55,7 +55,8 @@ class Client
             throw new NepApiMalformedResponseException('Malformed or no response from ' . $action . ': ' . $response->getBody()->getContents());
         }
         if ($decoded['code']) {
-            throw new NepApiException('Error while getting ' . $action . ': ' . $decoded['message'], $decoded['code']);
+            throw new NepApiException('Error while doing ' . $method . ' ' . $action . ': ' . $decoded['message'] . '. Request parameters: ' . print_r($options,
+                    true), $decoded['code']);
         }
 
         return $decoded;

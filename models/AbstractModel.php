@@ -18,7 +18,7 @@ abstract class AbstractModel
         }
     }
 
-    public function toArray(): array
+    public function prepareForSave(): array
     {
         return (array)$this;
     }

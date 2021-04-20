@@ -49,6 +49,16 @@ class Person extends AbstractModel
     public array $uploadedDocuments;
 
 
+    public function prepareForSave(): array
+    {
+        $array = parent::prepareForSave();
+        unset($array['uploadedDocuments']);
+        unset($array['updatedAt']);
+        unset($array['createdAt']);
+
+        return $array;
+    }
+
     public function __construct(array $array)
     {
         $array['updatedAt'] = new DateTime($array['updatedAt']);

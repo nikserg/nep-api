@@ -103,7 +103,7 @@ abstract class AbstractRepository
      */
     public function save(AbstractModel $model): int
     {
-        $data = $this->client->post($this->getAction(), $model->toArray());
+        $data = $this->client->post($this->getAction(), $model->prepareForSave());
         if (!isset($data['id'])) {
             throw new NepApiMalformedResponseException('Expected `id` key, got array ' . print_r($data, true));
         }
