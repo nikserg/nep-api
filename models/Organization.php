@@ -20,4 +20,9 @@ class Organization extends AbstractModel
      * @var string|null ИНН организации
      */
     public ?string $inn;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

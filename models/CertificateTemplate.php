@@ -46,4 +46,10 @@ class CertificateTemplate extends AbstractModel {
         $array['documents'] = $items;
         parent::__construct($array);
     }
+
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

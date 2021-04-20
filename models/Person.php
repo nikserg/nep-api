@@ -82,4 +82,9 @@ class Person extends AbstractModel
 
         return implode(' ', $pieces);
     }
+
+    public function __toString()
+    {
+        return $this->getFio();
+    }
 }
