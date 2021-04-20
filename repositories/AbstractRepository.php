@@ -2,8 +2,10 @@
 
 namespace nikserg\NepApi\repositories;
 
+use GuzzleHttp\Exception\GuzzleException;
 use nikserg\NepApi\Client;
 use nikserg\NepApi\criteria\AbstractCriteria;
+use nikserg\NepApi\exception\NepApiException;
 use nikserg\NepApi\exception\NepApiMalformedResponseException;
 use nikserg\NepApi\models\AbstractModel;
 
@@ -25,8 +27,8 @@ abstract class AbstractRepository
      * @param AbstractCriteria|null $criteria
      * @return int
      * @throws NepApiMalformedResponseException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \nikserg\NepApi\exception\NepApiException
+     * @throws GuzzleException
+     * @throws NepApiException
      */
     public function count(AbstractCriteria $criteria = null): int
     {
@@ -41,8 +43,9 @@ abstract class AbstractRepository
     private function getParams(AbstractCriteria $criteria = null): array
     {
         if ($criteria) {
-            return $criteria->toArray();
+            return ['criteria' => $criteria->toArray()];
         }
+
         return [];
     }
 
@@ -53,8 +56,8 @@ abstract class AbstractRepository
      * @param AbstractCriteria|null $criteria
      * @return AbstractModel[]
      * @throws NepApiMalformedResponseException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \nikserg\NepApi\exception\NepApiException
+     * @throws GuzzleException
+     * @throws NepApiException
      */
     public function list(AbstractCriteria $criteria = null): array
     {
@@ -79,8 +82,8 @@ abstract class AbstractRepository
      * @param int $id
      * @return AbstractModel
      * @throws NepApiMalformedResponseException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \nikserg\NepApi\exception\NepApiException
+     * @throws GuzzleException
+     * @throws NepApiException
      */
     public function get(int $id): AbstractModel
     {
@@ -89,6 +92,22 @@ abstract class AbstractRepository
             throw new NepApiMalformedResponseException('Expected `item` key, got array ' . print_r($data, true));
         }
         $modelClassName = $this->getModelClass();
+
         return new $modelClassName($data['item']);
+    }
+
+    /**
+     * @param AbstractModel $model
+     * @return int ID сохраненной модели
+     * @throws NepApiMalformedResponseException
+     */
+    public function save(AbstractModel $model): int
+    {
+        $data = $this->client->post($this->getAction(), $model->toArray());
+        if (!isset($data['id'])) {
+            throw new NepApiMalformedResponseException('Expected `id` key, got array ' . print_r($data, true));
+        }
+
+        return $data['id'];
     }
 }

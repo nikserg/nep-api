@@ -17,4 +17,9 @@ abstract class AbstractModel
             $this->{$key} = $value;
         }
     }
+
+    public function toArray(): array
+    {
+        return (array)$this;
+    }
 }

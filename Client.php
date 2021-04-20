@@ -6,7 +6,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use nikserg\NepApi\exception\NepApiException;
 use nikserg\NepApi\exception\NepApiMalformedResponseException;
-use Psr\Http\Message\ResponseInterface;
 
 class Client
 {
@@ -14,7 +13,6 @@ class Client
     public const ACTION_PERSON = 'person';
     public const ACTION_CERTIFICATE = 'certificate';
     public const ACTION_CERTIFICATE_TEMPLATE = 'certificate-template';
-
 
 
     protected \GuzzleHttp\Client $client;
@@ -41,7 +39,17 @@ class Client
      */
     public function get(string $action, $params = []): array
     {
-        $response = $this->client->get($action, ['query' => ['criteria' =>  $params]]);
+        return $this->doMethod('get', $action, ['query' => $params]);
+    }
+
+    public function post(string $action, $params = []): array
+    {
+        return $this->doMethod('post', $action, ['form_params' => $params]);
+    }
+
+    public function doMethod(string $method, string $action, $options): array
+    {
+        $response = $this->client->$method($action, $options);
         $decoded = json_decode($response->getBody()->getContents(), true);
         if (!isset($decoded['code'])) {
             throw new NepApiMalformedResponseException('Malformed or no response from ' . $action . ': ' . $response->getBody()->getContents());
@@ -52,5 +60,6 @@ class Client
 
         return $decoded;
     }
+
 
 }

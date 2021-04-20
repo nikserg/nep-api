@@ -3,13 +3,13 @@
 namespace nikserg\NepApi\repositories;
 
 use nikserg\NepApi\Client;
-use nikserg\NepApi\models\Organization;
+use nikserg\NepApi\criteria\PersonCriteria;
 use nikserg\NepApi\models\Person;
 
 /**
  * Class PersonRepository
  *
- * @method Person[] list()
+ * @method Person[] list(PersonCriteria $criteria = null)
  * @method Person get(int $id)
  * @package nikserg\NepApi\repositories
  */

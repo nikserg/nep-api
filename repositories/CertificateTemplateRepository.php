@@ -3,14 +3,13 @@
 namespace nikserg\NepApi\repositories;
 
 use nikserg\NepApi\Client;
+use nikserg\NepApi\criteria\CertificateTemplateCriteria;
 use nikserg\NepApi\models\CertificateTemplate;
-use nikserg\NepApi\models\Organization;
-use nikserg\NepApi\models\Person;
 
 /**
  * Class CertificateTemplateRepository
  *
- * @method CertificateTemplate[] list()
+ * @method CertificateTemplate[] list(CertificateTemplateCriteria $criteria = null)
  * @method CertificateTemplate get(int $id)
  * @package nikserg\NepApi\repositories
  */

@@ -2,6 +2,8 @@
 
 namespace nikserg\NepApi\models;
 
+use DateTime;
+
 /**
  * Class Person
  *
@@ -32,14 +34,14 @@ class Person extends AbstractModel
     public ?string $snils;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    public \DateTime $createdAt;
+    public DateTime $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
-    public \DateTime $updatedAt;
+    public DateTime $updatedAt;
 
     /**
      * @var UploadedDocument[]
@@ -49,13 +51,35 @@ class Person extends AbstractModel
 
     public function __construct(array $array)
     {
-        $array['updatedAt'] = new \DateTime($array['updatedAt']);
-        $array['createdAt'] = new \DateTime($array['createdAt']);
+        $array['updatedAt'] = new DateTime($array['updatedAt']);
+        $array['createdAt'] = new DateTime($array['createdAt']);
         $items = [];
         foreach ($array['uploadedDocuments'] as $item) {
             $items[] = new UploadedDocument($item);
         }
         $array['uploadedDocuments'] = $items;
         parent::__construct($array);
+    }
+
+    /**
+     * ФИО владельца
+     *
+     *
+     * @return string
+     */
+    public function getFio(): string
+    {
+        $pieces = [];
+        if ($this->lastName) {
+            $pieces[] = $this->lastName;
+        }
+        if ($this->firstName) {
+            $pieces[] = $this->firstName;
+        }
+        if ($this->middleName) {
+            $pieces[] = $this->middleName;
+        }
+
+        return implode(' ', $pieces);
     }
 }
