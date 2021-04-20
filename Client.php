@@ -48,6 +48,11 @@ class Client
         return $this->doMethod('post', $action, ['form_params' => $params]);
     }
 
+    public function postMultipart(string $action, $multipart = []): array
+    {
+        return $this->doMethod('post', $action, ['multipart' => $multipart]);
+    }
+
     public function doMethod(string $method, string $action, $options): array
     {
         $response = $this->client->$method($action, $options);

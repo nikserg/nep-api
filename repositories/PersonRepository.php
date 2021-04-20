@@ -15,6 +15,8 @@ use nikserg\NepApi\models\Person;
  */
 class PersonRepository extends AbstractRepository
 {
+    use DocumentsUploadTrait;
+
     protected function getAction(): string
     {
         return Client::ACTION_PERSON;
