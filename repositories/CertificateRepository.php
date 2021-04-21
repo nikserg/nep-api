@@ -18,6 +18,15 @@ class CertificateRepository extends AbstractRepository
 {
     use DocumentsUploadTrait;
 
+    /**
+     * @param int $id
+     * @param int $newStatus
+     */
+    public function setStatus(int $id, int $newStatus)
+    {
+        $this->client->post($this->getAction() . '/' . $id . '/status', ['status' => $newStatus]);
+    }
+
     protected function getAction(): string
     {
         return Client::ACTION_CERTIFICATE;

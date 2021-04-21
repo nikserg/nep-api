@@ -13,6 +13,10 @@ use DateTime;
  */
 class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
 {
+    public const STATUS_INIT = 0;
+    public const STATUS_LAUNCH = 500;
+    public const STATUS_DONE = 1000;
+
 
     /**
      * @var Person Человек, на которого выпускается сертификат
@@ -43,6 +47,16 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
      * @var DateTime
      */
     public DateTime $updatedAt;
+
+    /**
+     * @var int
+     */
+    public int $status;
+
+    /**
+     * @var string
+     */
+    public string $statusName;
 
     public function prepareForSave(): array
     {
