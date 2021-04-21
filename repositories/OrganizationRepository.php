@@ -16,6 +16,8 @@ use nikserg\NepApi\models\Organization;
  */
 class OrganizationRepository extends AbstractRepository
 {
+    use DocumentsUploadTrait;
+
     protected function getAction(): string
     {
         return Client::ACTION_ORGANIZATION;
