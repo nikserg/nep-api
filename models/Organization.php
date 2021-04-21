@@ -9,7 +9,7 @@ namespace nikserg\NepApi\models;
  *
  * @package nikserg\NepApi\models
  */
-class Organization extends AbstractModel
+class Organization extends AbstractModel implements HasUploadedDocumentsInterface
 {
     /**
      * @var string Название организации
@@ -21,6 +21,12 @@ class Organization extends AbstractModel
      */
     public ?string $inn;
 
+
+    /**
+     * @var UploadedDocument[]
+     */
+    public array $uploadedDocuments;
+
     public function __toString()
     {
         return $this->name;
@@ -30,5 +36,27 @@ class Organization extends AbstractModel
     public function getDocumentType(): string
     {
         return Document::TYPE_ORGANIZATION;
+    }
+
+
+    public function __construct(array $array)
+    {
+        $items = [];
+        if (isset($array['uploadedDocuments'])) {
+            foreach ($array['uploadedDocuments'] as $item) {
+                $items[] = new UploadedDocument($item);
+            }
+        }
+        $array['uploadedDocuments'] = $items;
+        parent::__construct($array);
+    }
+
+
+    /**
+     * @return UploadedDocument[]
+     */
+    public function getUploadedDocuments(): array
+    {
+        return $this->uploadedDocuments;
     }
 }
