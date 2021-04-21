@@ -59,4 +59,13 @@ class Organization extends AbstractModel implements HasUploadedDocumentsInterfac
     {
         return $this->uploadedDocuments;
     }
+
+
+    public function prepareForSave(): array
+    {
+        $array = parent::prepareForSave();
+        unset($array['uploadedDocuments']);
+
+        return $array;
+    }
 }

@@ -46,12 +46,16 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
 
     public function prepareForSave(): array
     {
-        $array = parent::prepareForSave();
-        unset($array['uploadedDocuments']);
-        unset($array['updatedAt']);
-        unset($array['createdAt']);
+        $data = [
+            'certificate_template' => $this->certificateTemplate->id,
+            'organization'         => $this->organization->id,
+            'person'               => $this->person->id,
+        ];
+        if ($this->id) {
+            $data['id'] = $this->id;
+        }
 
-        return $array;
+        return $data;
     }
 
 
