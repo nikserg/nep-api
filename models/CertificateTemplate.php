@@ -1,4 +1,5 @@
 <?php
+
 namespace nikserg\NepApi\models;
 
 /**
@@ -8,7 +9,8 @@ namespace nikserg\NepApi\models;
  *
  * @package nikserg\NepApi\models
  */
-class CertificateTemplate extends AbstractModel {
+class CertificateTemplate extends AbstractModel
+{
 
     /**
      * @var string Название шаблона
@@ -40,8 +42,10 @@ class CertificateTemplate extends AbstractModel {
         $array['oids'] = $items;
 
         $items = [];
-        foreach ($array['documents'] as $item) {
-            $items[] = new Document($item);
+        if (isset($array['documents'])) {
+            foreach ($array['documents'] as $item) {
+                $items[] = new Document($item);
+            }
         }
         $array['documents'] = $items;
         parent::__construct($array);

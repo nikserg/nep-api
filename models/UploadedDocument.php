@@ -2,6 +2,8 @@
 
 namespace nikserg\NepApi\models;
 
+use DateTime;
+
 /**
  * Class UploadedDocument
  *
@@ -19,6 +21,17 @@ class UploadedDocument extends AbstractModel
      */
     public string $downloadLink;
 
+
+    /**
+     * @var DateTime
+     */
+    public DateTime $createdAt;
+
+    /**
+     * @var DateTime
+     */
+    public DateTime $updatedAt;
+
     /**
      * @var Document Описание типа документа
      */
@@ -26,6 +39,13 @@ class UploadedDocument extends AbstractModel
 
     public function __construct(array $array)
     {
+
+        if (isset($array['updatedAt']) && $array['updatedAt']) {
+            $array['updatedAt'] = new DateTime($array['updatedAt']);
+        }
+        if (isset($array['createdAt']) && $array['createdAt']) {
+            $array['createdAt'] = new DateTime($array['createdAt']);
+        }
         $array['document'] = new Document($array['document']);
         parent::__construct($array);
     }

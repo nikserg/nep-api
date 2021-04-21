@@ -18,16 +18,25 @@ class Client
 
     protected \GuzzleHttp\Client $client;
 
-    public function __construct($apiKey, $host = 'https://crm.uc-itcom.ru',)
+    public function __construct($apiKey, protected string $host = 'https://crm.uc-itcom.ru',)
     {
         $this->client = new \GuzzleHttp\Client([
-            'base_uri'                  => $host,
+            'base_uri'                  => $this->host,
             RequestOptions::VERIFY      => false,
             RequestOptions::HTTP_ERRORS => false,
             RequestOptions::HEADERS     => [
                 'Authorization' => 'Bearer ' . $apiKey,
             ],
         ]);
+    }
+
+    /**
+     * @param string $url
+     * @return string
+     */
+    public function makeAbsoluteUrl(string $url): string
+    {
+        return $this->host . (string)$url;
     }
 
     /**
