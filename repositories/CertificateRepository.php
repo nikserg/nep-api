@@ -16,6 +16,8 @@ use nikserg\NepApi\models\Certificate;
  */
 class CertificateRepository extends AbstractRepository
 {
+    use DocumentsUploadTrait;
+
     protected function getAction(): string
     {
         return Client::ACTION_CERTIFICATE;
