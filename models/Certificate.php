@@ -111,4 +111,14 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     {
         return Document::TYPE_CERTIFICATE;
     }
+
+    /**
+     * Ссылка для получения информации по сертификату без авторизации
+     *
+     * @return string
+     */
+    public function getExternalAccessUrl(): string
+    {
+        return '/certificate/' . $this->id . '?modelId=' . $this->id . '&modelClass=Certificate&token=' . $this->token;
+    }
 }
