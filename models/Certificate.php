@@ -58,6 +58,11 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
      */
     public string $statusName;
 
+    /**
+     * @var string
+     */
+    public string $token;
+
     public function prepareForSave(): array
     {
         $data = [
