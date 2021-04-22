@@ -3,6 +3,7 @@
 namespace nikserg\NepApi\models;
 
 use DateTime;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Class Certificate
@@ -113,12 +114,22 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     }
 
     /**
+     * @param int    $id
+     * @param string $token
+     * @return string
+     */
+    public static function makeExternalAccessUrl(int $id, string $token): string
+    {
+        return '/certificate/' . $id . '?modelId=' . $id . '&modelClass=Certificate&token=' . $token;
+    }
+
+    /**
      * Ссылка для получения информации по сертификату без авторизации
      *
      * @return string
      */
-    public function getExternalAccessUrl(): string
+    #[Pure] public function getExternalAccessUrl(): string
     {
-        return '/certificate/' . $this->id . '?modelId=' . $this->id . '&modelClass=Certificate&token=' . $this->token;
+        return static::makeExternalAccessUrl($this->id, $this->token);
     }
 }
