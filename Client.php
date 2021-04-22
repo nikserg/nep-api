@@ -49,17 +49,17 @@ class Client
      */
     public function get(string $action, $params = []): array
     {
-        return $this->doMethod('get', $action, ['query' => $params]);
+        return $this->doMethod('get', $action, [RequestOptions::QUERY => $params]);
     }
 
     public function post(string $action, $params = []): array
     {
-        return $this->doMethod('post', $action, ['form_params' => $params]);
+        return $this->doMethod('post', $action, [RequestOptions::FORM_PARAMS => $params]);
     }
 
     public function postMultipart(string $action, $multipart = []): array
     {
-        return $this->doMethod('post', $action, ['multipart' => $multipart]);
+        return $this->doMethod('post', $action, [RequestOptions::MULTIPART => $multipart]);
     }
 
     public function doMethod(string $method, string $action, $options): array
