@@ -17,6 +17,7 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     public const STATUS_INIT = 0;
     public const STATUS_LAUNCH = 500;
     public const STATUS_DONE = 1000;
+    public const STATUS_SENDED = 700; //Запрос на создание сертификата отправлен
 
 
     /**
