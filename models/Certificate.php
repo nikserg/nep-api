@@ -61,6 +61,11 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     public string $statusName;
 
     /**
+     * @var string|null Содержимое сертификата, если он выпущен
+     */
+    public ?string $certificateContent;
+
+    /**
      * @var string
      */
     public string $token;
