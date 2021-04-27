@@ -18,6 +18,11 @@ class Uc extends AbstractModel implements Stringable
     public const TYPE_AUTO = 'auto';
     public const TYPE_MANUAL = 'manual';
 
+    public const TYPE_NAMES = [
+        self::TYPE_AUTO   => 'Автоматический',
+        self::TYPE_MANUAL => 'Ручной',
+    ];
+
     /**
      * @var string Тип УЦ
      */
@@ -32,6 +37,6 @@ class Uc extends AbstractModel implements Stringable
 
     public function __toString()
     {
-        return $this->name;
+        return $this->name . ' (' . self::TYPE_NAMES[$this->type] . ')';
     }
 }

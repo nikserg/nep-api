@@ -85,6 +85,9 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
         if ($this->id) {
             $data['id'] = $this->id;
         }
+        if ($this->uc) {
+            $data['uc'] = $this->uc->id;
+        }
 
         return $data;
     }
