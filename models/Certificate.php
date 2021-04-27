@@ -70,6 +70,12 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
      */
     public ?string $certificateContent;
 
+
+    /**
+     * @var string|null Содержимое запроса, если он отправлен
+     */
+    public ?string $requestContent;
+
     /**
      * @var string
      */
