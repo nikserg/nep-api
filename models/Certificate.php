@@ -105,10 +105,16 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
             }
         }
         $array['uploadedDocuments'] = $items;
-        $array['person'] = new Person($array['person']);
-        $array['organization'] = new Organization($array['organization']);
-        $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
-        if (isset($array['uc']) && $array['uc']) {
+        if (isset($array['person'])) {
+            $array['person'] = new Person($array['person']);
+        }
+        if (isset($array['organization'])) {
+            $array['organization'] = new Organization($array['organization']);
+        }
+        if (isset($array['certificateTemplate'])) {
+            $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
+        }
+        if (isset($array['uc'])) {
             $array['uc'] = new Uc($array['uc']);
         }
         parent::__construct($array);
