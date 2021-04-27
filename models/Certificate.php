@@ -41,6 +41,11 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
     public Organization $organization;
 
     /**
+     * @var Uc|null Информация об УЦ
+     */
+    public ?Uc $uc;
+
+    /**
      * @var DateTime
      */
     public DateTime $createdAt;
@@ -103,6 +108,9 @@ class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
         $array['person'] = new Person($array['person']);
         $array['organization'] = new Organization($array['organization']);
         $array['certificateTemplate'] = new CertificateTemplate($array['certificateTemplate']);
+        if (isset($array['uc']) && $array['uc']) {
+            $array['uc'] = new Uc($array['uc']);
+        }
         parent::__construct($array);
     }
 
