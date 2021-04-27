@@ -14,10 +14,10 @@ use JetBrains\PhpStorm\Pure;
  */
 class Certificate extends AbstractModel implements HasUploadedDocumentsInterface
 {
-    public const STATUS_INIT = 0;
-    public const STATUS_LAUNCH = 500;
-    public const STATUS_DONE = 1000;
-    public const STATUS_SENDED = 700; //Запрос на создание сертификата отправлен
+    public const STATUS_INIT = 0; //Заявка создана
+    public const STATUS_LAUNCH = 500; //Выпуск одобрен, ожидание генерации клиентом
+    public const STATUS_SENDED = 700; //Запрос на создание сертификата отправлен, ожидание выпуска на УЦ
+    public const STATUS_DONE = 1000; //Сертификат выпущен
 
 
     /**
