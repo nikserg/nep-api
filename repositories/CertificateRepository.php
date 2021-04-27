@@ -36,13 +36,7 @@ class CertificateRepository extends AbstractRepository
      */
     public function sendRequest(int $id, string $requestContent): void
     {
-        $this->client->postMultipart($this->getAction() . '/' . $id . '/request', [
-            [
-                'name'     => 'request',
-                'contents' => $requestContent,
-                'filename' => 'request',
-            ],
-        ]);
+        $this->client->post($this->getAction() . '/' . $id . '/request', ['request' => $requestContent,]);
     }
 
     protected function getAction(): string
