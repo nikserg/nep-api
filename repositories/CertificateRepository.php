@@ -27,6 +27,24 @@ class CertificateRepository extends AbstractRepository
         $this->client->post($this->getAction() . '/' . $id . '/status', ['status' => $newStatus]);
     }
 
+    /**
+     * Отправить запрос на генерацию
+     *
+     *
+     * @param int    $id
+     * @param string $requestContent
+     */
+    public function sendRequest(int $id, string $requestContent): void
+    {
+        $this->client->postMultipart($this->getAction() . '/' . $id . '/request', [
+            [
+                'name'     => 'request',
+                'contents' => $requestContent,
+                'filename' => 'request',
+            ],
+        ]);
+    }
+
     protected function getAction(): string
     {
         return Client::ACTION_CERTIFICATE;
