@@ -3,6 +3,7 @@
 namespace nikserg\NepApi\models;
 
 use DateTime;
+use Stringable;
 
 /**
  * Class Person
@@ -11,7 +12,7 @@ use DateTime;
  *
  * @package nikserg\NepApi\models
  */
-class Person extends AbstractModel implements HasUploadedDocumentsInterface
+class Person extends AbstractModel implements HasUploadedDocumentsInterface, Stringable
 {
     /**
      * @var string|null

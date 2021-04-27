@@ -2,6 +2,8 @@
 
 namespace nikserg\NepApi\models;
 
+use Stringable;
+
 /**
  * Class Organization
  *
@@ -9,7 +11,7 @@ namespace nikserg\NepApi\models;
  *
  * @package nikserg\NepApi\models
  */
-class Organization extends AbstractModel implements HasUploadedDocumentsInterface
+class Organization extends AbstractModel implements HasUploadedDocumentsInterface, Stringable
 {
     /**
      * @var string Название организации

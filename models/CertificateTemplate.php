@@ -2,6 +2,8 @@
 
 namespace nikserg\NepApi\models;
 
+use Stringable;
+
 /**
  * Class CertificateTemplate
  *
@@ -9,7 +11,7 @@ namespace nikserg\NepApi\models;
  *
  * @package nikserg\NepApi\models
  */
-class CertificateTemplate extends AbstractModel
+class CertificateTemplate extends AbstractModel implements Stringable
 {
 
     /**

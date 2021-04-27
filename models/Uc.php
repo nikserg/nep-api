@@ -3,6 +3,7 @@
 namespace nikserg\NepApi\models;
 
 use JetBrains\PhpStorm\ExpectedValues;
+use Stringable;
 
 /**
  * Class Uc
@@ -11,7 +12,7 @@ use JetBrains\PhpStorm\ExpectedValues;
  *
  * @package nikserg\NepApi\models
  */
-class Uc extends AbstractModel
+class Uc extends AbstractModel implements Stringable
 {
 
     public const TYPE_AUTO = 'auto';
@@ -27,4 +28,10 @@ class Uc extends AbstractModel
      * @var string Название
      */
     public string $name;
+
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
