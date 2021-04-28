@@ -19,12 +19,18 @@ class CertificateRepository extends AbstractRepository
     use DocumentsUploadTrait;
 
     /**
+     * Одобрить выпуск сертификата
+     *
+     *
      * @param int $id
-     * @param int $newStatus
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \nikserg\NepApi\exception\NepApiException
+     * @throws \nikserg\NepApi\exception\NepApiMalformedResponseException
      */
-    public function setStatus(int $id, int $newStatus)
+    public function launch(int $id)
     {
-        $this->client->post($this->getAction() . '/' . $id . '/status', ['status' => $newStatus]);
+
+        $this->client->get($this->getAction() . '/' . $id . '/launch');
     }
 
     /**
