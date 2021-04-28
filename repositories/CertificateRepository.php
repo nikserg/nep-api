@@ -39,6 +39,19 @@ class CertificateRepository extends AbstractRepository
         $this->client->post($this->getAction() . '/' . $id . '/request', ['request' => $requestContent,]);
     }
 
+
+    /**
+     * Отправить выпущенный сертификат
+     *
+     *
+     * @param int    $id
+     * @param string $certificateContent
+     */
+    public function sendCertificate(int $id, string $certificateContent): void
+    {
+        $this->client->post($this->getAction() . '/' . $id . '/certificate', ['certificate' => $certificateContent,]);
+    }
+
     protected function getAction(): string
     {
         return Client::ACTION_CERTIFICATE;
